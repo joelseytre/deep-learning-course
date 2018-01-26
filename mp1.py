@@ -1,5 +1,7 @@
 import matplotlib.pyplot as plt
-%matplotlib inline
+
+# for Jupyter only!!
+# %matplotlib inline
 import numpy as np
 
 def generate_a_drawing(figsize, U, V, noise=0.0):
