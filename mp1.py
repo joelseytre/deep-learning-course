@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 # for Jupyter only!!
 # %matplotlib inline
 import numpy as np
+from keras.utils import np_utils
+
 
 def generate_a_drawing(figsize, U, V, noise=0.0):
     fig = plt.figure(figsize=(figsize,figsize))
@@ -16,6 +18,7 @@ def generate_a_drawing(figsize, U, V, noise=0.0):
     imdata = imdata + noise * np.random.random(imdata.size)
     plt.close(fig)
     return imdata
+
 
 def generate_a_rectangle(noise=0.0, free_location=False):
     figsize = 1.0    
@@ -72,13 +75,13 @@ def generate_a_triangle(noise=0.0, free_location=False):
 
 
 im = generate_a_rectangle(10, True)
-plt.imshow(im.reshape(72,72), cmap='gray')
+plt.imshow(im.reshape(72, 72), cmap='gray')
 
 im = generate_a_disk(10)
-plt.imshow(im.reshape(72,72), cmap='gray')
+plt.imshow(im.reshape(72, 72), cmap='gray')
 
 [im, v] = generate_a_triangle(20, False)
-plt.imshow(im.reshape(72,72), cmap='gray')
+plt.imshow(im.reshape(72, 72), cmap='gray')
 
 
 def generate_dataset_classification(nb_samples, noise=0.0, free_location=False):
@@ -101,11 +104,13 @@ def generate_dataset_classification(nb_samples, noise=0.0, free_location=False):
     X = (X + noise) / (255 + 2 * noise)
     return [X, Y]
 
+
 def generate_test_set_classification():
     np.random.seed(42)
     [X_test, Y_test] = generate_dataset_classification(300, 20, True)
     Y_test = np_utils.to_categorical(Y_test, 3) 
     return [X_test, Y_test]
+
 
 def generate_dataset_regression(nb_samples, noise=0.0):
     # Getting im_size:
@@ -122,6 +127,7 @@ def generate_dataset_regression(nb_samples, noise=0.0):
 
 import matplotlib.patches as patches
 
+
 def visualize_prediction(x, y):
     fig, ax = plt.subplots(figsize=(5, 5))
     I = x.reshape((72,72))
@@ -135,10 +141,11 @@ def visualize_prediction(x, y):
 
     plt.show()
 
+
 def generate_test_set_regression():
     np.random.seed(42)
     [X_test, Y_test] = generate_dataset_regression(300, 20)
-    Y_test = np_utils.to_categorical(Y_test, 3) 
+    Y_test = to_categorical(Y_test, 3)
     return [X_test, Y_test]
 
 
