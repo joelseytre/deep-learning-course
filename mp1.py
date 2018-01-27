@@ -84,14 +84,14 @@ plt.imshow(im.reshape(72, 72), cmap='gray')
 plt.imshow(im.reshape(72, 72), cmap='gray')
 
 
-def generate_dataset_classification(nb_samples, noise=0.0, free_location=False):
+def generate_dataset_classification(nb_samples, noise=0.0, free_location=False, display_on=True):
     # Getting im_size:
     im_size = generate_a_rectangle().shape[0]
     X = np.zeros([nb_samples,im_size])
     Y = np.zeros(nb_samples)
     print('Creating data:')
     for i in range(nb_samples):
-        if i % 10 == 0:
+        if i % 100 == 0 and display_on:
             print(i)
         category = np.random.randint(3)
         if category == 0:
@@ -105,9 +105,9 @@ def generate_dataset_classification(nb_samples, noise=0.0, free_location=False):
     return [X, Y]
 
 
-def generate_test_set_classification():
+def generate_test_set_classification(n_samples, display=True):
     np.random.seed(42)
-    [X_test, Y_test] = generate_dataset_classification(300, 20, True)
+    [X_test, Y_test] = generate_dataset_classification(n_samples, 20, True, display_on=display)
     Y_test = np_utils.to_categorical(Y_test, 3) 
     return [X_test, Y_test]
 
@@ -119,7 +119,7 @@ def generate_dataset_regression(nb_samples, noise=0.0):
     Y = np.zeros([nb_samples, 6])
     print('Creating data:')
     for i in range(nb_samples):
-        if i % 10 == 0:
+        if i % 100 == 0:
             print(i)
         [X[i], Y[i]] = generate_a_triangle(noise, True)
     X = (X + noise) / (255 + 2 * noise)
@@ -145,7 +145,6 @@ def visualize_prediction(x, y):
 def generate_test_set_regression():
     np.random.seed(42)
     [X_test, Y_test] = generate_dataset_regression(300, 20)
-    Y_test = to_categorical(Y_test, 3)
     return [X_test, Y_test]
 
 
