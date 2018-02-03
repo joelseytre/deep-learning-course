@@ -77,7 +77,7 @@ def generate_a_triangle(noise=0.0, free_location=False):
 im = generate_a_rectangle(10, True)
 plt.imshow(im.reshape(72, 72), cmap='gray')
 
-im = generate_a_disk(10)
+imim = generate_a_disk(10)
 plt.imshow(im.reshape(72, 72), cmap='gray')
 
 [im, v] = generate_a_triangle(20, False)
